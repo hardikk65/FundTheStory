@@ -16,7 +16,7 @@ public class Story{
     @OneToOne(mappedBy = "story")
     private Campaign campaign;
 
-    public Story(){};
+    public Story(){}
 
     public Story(String title,String description){
         this.title = title;
