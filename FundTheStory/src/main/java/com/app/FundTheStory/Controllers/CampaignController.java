@@ -20,7 +20,7 @@ public class CampaignController {
     @GetMapping("/getCampaigns")
     public List<Campaign> getCampaigns(){
         return campaignService.getCampaigns();
-    };
+    }
 
     @PostMapping("/addCampaign")
     public void addCampaign(@RequestBody StorySubmissionRequest submissionRequest){
