@@ -16,7 +16,9 @@ public class Story{
     @OneToOne(mappedBy = "story")
     private Campaign campaign;
 
-    Story(String title,String description){
+    public Story(){};
+
+    public Story(String title,String description){
         this.title = title;
         this.description = description;
     }
@@ -41,5 +43,7 @@ public class Story{
     public void setCampaign(Campaign campaign){   // Functionality may not be needed
         this.campaign = campaign;
     }
+
+
 
 }

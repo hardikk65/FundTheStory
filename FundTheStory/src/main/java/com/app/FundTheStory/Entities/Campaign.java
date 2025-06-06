@@ -17,11 +17,11 @@ public class Campaign {
     private LocalDate startDate;
     private LocalDate endDate;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "campaign_category_id")
-    private CampaignCategory category;
+    private campaignCategory campaignCategory;
 
-    @OneToMany
+    @OneToOne
     @JoinColumn(name = "story_id",unique = true)
     private Story story;
 
@@ -60,6 +60,10 @@ public class Campaign {
         return endDate;
     }
 
+    public campaignCategory getCampaignCategory(){
+        return campaignCategory;
+    }
+
     public Story getStory(){
         return story;
     }
@@ -78,6 +82,10 @@ public class Campaign {
 
     public void setEndDate(LocalDate endDate){
         this.endDate = endDate;
+    }
+
+    public void setCampaignCategory(campaignCategory category){
+        this.campaignCategory = category;
     }
 
     public void setStory(Story story){
