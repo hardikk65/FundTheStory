@@ -1,6 +1,8 @@
 package com.app.FundTheStory.Entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +13,7 @@ public class campaignCategory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Category cannot be empty")
     private String category;
 
     @OneToMany(mappedBy = "campaignCategory", cascade = CascadeType.ALL)

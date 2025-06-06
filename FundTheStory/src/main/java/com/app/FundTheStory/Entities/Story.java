@@ -1,6 +1,8 @@
 package com.app.FundTheStory.Entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Story{
@@ -9,8 +11,11 @@ public class Story{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
+    @NotBlank(message = "Title cannot be empty. ")
     private String title;
+
+
+    @NotBlank(message = "Description cannot be empty. ")
     private String description;
 
     @OneToOne(mappedBy = "story")

@@ -17,12 +17,12 @@ public class Campaign {
     private LocalDate startDate;
     private LocalDate endDate;
 
-    @ManyToOne
-    @JoinColumn(name = "campaign_category_id")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "campaign_category_id",nullable = false)
     private campaignCategory campaignCategory;
 
-    @OneToOne
-    @JoinColumn(name = "story_id",unique = true)
+    @OneToOne(optional = false)
+    @JoinColumn(name = "story_id",unique = true,nullable = false)
     private Story story;
 
 

@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class CampaignService {
@@ -29,13 +31,31 @@ public class CampaignService {
 
     public void addCampaign(StorySubmissionRequest submissionRequest){
         Story story = submissionRequest.getStory();
+
         campaignCategory category = submissionRequest.getCategory();
+
         Campaign campaign = submissionRequest.getCampaign();
 
+        // Saves Story in DB
         Story savedstory = storyRepository.save(story);
-        campaignCategory savedCategory = campaignCategoryRepository.save(category); // TODO: Check DB before inserting category
+
+        // Fetches the Category from DB
+        List<campaignCategory> savedCategories = campaignCategoryRepository.findAll();
+
+        // Searches for Existing Category in DB
+        Optional<campaignCategory> existingCategory = savedCategories.stream()
+                .filter(c -> Objects.equals(c.getCategory(), category.getCategory()))
+                .findFirst();
+
+        // Saves Category in DB
+        campaignCategory savedCategory = existingCategory
+                .orElseGet(() -> campaignCategoryRepository.save(category));
+
+        //Calling Setters
         campaign.setStory(savedstory);
         campaign.setCampaignCategory(savedCategory);
+
+        // Saving Campaign in DB
         campaignRepository.save(campaign);
 
     }
