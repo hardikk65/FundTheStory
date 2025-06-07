@@ -9,8 +9,10 @@ import com.app.FundTheStory.Repositories.CampaignCategoryRepository;
 import com.app.FundTheStory.Repositories.CampaignRepository;
 import com.app.FundTheStory.Repositories.StoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -58,5 +60,26 @@ public class CampaignService {
         // Saving Campaign in DB
         campaignRepository.save(campaign);
 
+    }
+
+    public List<Campaign> filterByCategory(String category){
+        List<campaignCategory> categories = campaignCategoryRepository.findAll();   // TODO: Don't get all categories
+
+
+        campaignCategory foundCategory = null;
+
+        for(campaignCategory ctg: categories){
+            if(Objects.equals(ctg.getCategory(), category)){
+                foundCategory = ctg;
+            }
+        }
+        if(foundCategory == null){
+            return new ArrayList<>();
+        }
+        return campaignRepository.findByCampaignCategory_Id(foundCategory.getId());
+    }
+
+    public List<Campaign> filterByPrice(double minAmount,double maxAmount){
+        return campaignRepository.findByGoalAmountBetween(minAmount,maxAmount);
     }
 }
