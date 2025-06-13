@@ -11,15 +11,16 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/Campaign")
+@RequestMapping("/campaigns")
 public class CampaignController {
 
     @Autowired
     CampaignService campaignService;
 
 
-    @GetMapping
+    @GetMapping("/")
     public List<Campaign> getCampaigns(){ // Display All listed Campaigns
         return campaignService.getCampaigns();
     }
@@ -31,7 +32,7 @@ public class CampaignController {
     }
 
 
-    @GetMapping("/filter")
+    @GetMapping("/filterByCategory")
     public ResponseEntity<List<Campaign>> filterByCategory(@RequestParam(required = false) String category){
         if(category == null || category.isEmpty()){
             return ResponseEntity.ok(campaignService.getCampaigns());
@@ -47,7 +48,7 @@ public class CampaignController {
         return ResponseEntity.ok(campaigns);
 
     }
-    @GetMapping("/filter")
+    @GetMapping("/filterByPrice")
     public ResponseEntity<List<Campaign>> filterByPrice(@RequestParam(required = false) Double minAmount,
                                                         @RequestParam(required = false) Double maxAmount){
 

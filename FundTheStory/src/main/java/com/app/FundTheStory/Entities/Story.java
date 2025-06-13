@@ -18,9 +18,6 @@ public class Story{
     @NotBlank(message = "Description cannot be empty. ")
     private String description;
 
-    @OneToOne(mappedBy = "story")
-    private Campaign campaign;
-
     public Story(){}
 
     public Story(String title,String description){
@@ -34,9 +31,6 @@ public class Story{
     public String getDescription(){
         return description;
     }
-    public Campaign getCampaign(){
-        return campaign;
-    }
 
     public void setTitle(String title){
         this.title = title;
@@ -44,11 +38,5 @@ public class Story{
     public void setDescription(String description){
         this.description = description;
     }
-
-    public void setCampaign(Campaign campaign){   // Functionality may not be needed
-        this.campaign = campaign;
-    }
-
-
 
 }

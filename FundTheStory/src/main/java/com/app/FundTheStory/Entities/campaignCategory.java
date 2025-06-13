@@ -16,8 +16,6 @@ public class campaignCategory {
     @NotBlank(message = "Category cannot be empty")
     private String category;
 
-    @OneToMany(mappedBy = "campaignCategory", cascade = CascadeType.ALL)
-    private List<Campaign> campaigns = new ArrayList<>();
 
     public campaignCategory() {
         // Default constructor required by JPA
@@ -27,10 +25,6 @@ public class campaignCategory {
         this.category = category;
     }
 
-    public campaignCategory(String category, List<Campaign> campaigns) {
-        this.category = category;
-        this.campaigns = campaigns;
-    }
 
     public Long getId() {
         return id;
@@ -38,14 +32,6 @@ public class campaignCategory {
 
     public String getCategory() {
         return category;
-    }
-
-    public List<Campaign> getCampaigns() {
-        return campaigns;
-    }
-
-    public void setCampaigns(List<Campaign> campaigns) {
-        this.campaigns = campaigns;
     }
 
     public void setCategory(String category) {
